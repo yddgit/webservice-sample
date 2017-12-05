@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://service.project.my.com/user"
+	xmlns:tns="http://service.project.my.com/user"
+	elementFormDefault="qualified">
+
+	<!-- 方法请求和返回消息定义 -->
+	<xs:element name="add" type="tns:add"/>
+	<xs:element name="addResponse" type="tns:addResponse"/>
+	<xs:element name="delete" type="tns:delete"/>
+	<xs:element name="deleteResponse" type="tns:deleteResponse"/>
+	<xs:element name="list" type="tns:list"/>
+	<xs:element name="listResponse" type="tns:listResponse"/>
+	<xs:element name="login" type="tns:login"/>
+	<xs:element name="loginResponse" type="tns:loginResponse"/>
+
+	<!-- user实体定义 -->
+	<xs:complexType name="user">
+		<xs:sequence>
+			<xs:element name="username" type="tns:username"/>
+			<xs:element name="password" type="tns:password"/>
+			<xs:element name="nickname" type="tns:nickname"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- user实体属性值限定 -->
+	<xs:simpleType name="username">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="password">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="nickname">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 消息类型定义 -->
+	<xs:complexType name="add">
+		<xs:sequence>
+			<xs:element name="user" type="tns:user"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="addResponse">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="delete">
+		<xs:sequence>
+			<xs:element name="username" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="deleteResponse">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="list">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="listResponse">
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="user" type="tns:user"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="login">
+		<xs:sequence>
+			<xs:element name="username" type="xs:string"/>
+			<xs:element name="password" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="loginResponse">
+		<xs:sequence>
+			<xs:element name="user" type="tns:user"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

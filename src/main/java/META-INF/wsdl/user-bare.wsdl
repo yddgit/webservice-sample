@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://service.project.my.com/user"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="userService"
+	targetNamespace="http://service.project.my.com/user">
+
+	<!-- 基于Document的BARE方式 -->
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://service.project.my.com/user">
+			<!-- user实体定义 -->
+			<xsd:complexType name="user">
+				<xsd:sequence>
+					<xsd:element name="username" type="xsd:string"/>
+					<xsd:element name="password" type="xsd:string"/>
+					<xsd:element name="nickname" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<!-- 方法请求和返回消息定义 -->
+			<!-- add方法的请求参数 -->
+			<xsd:element name="user" type="tns:user"/>
+			<!-- delete方法的请求参数 -->
+			<xsd:element name="username" type="xsd:string"/>
+			<!-- list方法的返回参数 -->
+			<xsd:element name="userList">
+				<xsd:complexType>
+					<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+						<xsd:element name="user" type="tns:user"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- login方法的请求参数 -->
+			<xsd:element name="login">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:username"/>
+						<xsd:element name="password" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- login方法的返回参数 -->
+			<xsd:element name="loginUser">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="user" type="tns:user"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="add">
+		<wsdl:part element="tns:user" name="user" />
+	</wsdl:message>
+	<wsdl:message name="addResponse"/>
+
+	<wsdl:message name="delete">
+		<wsdl:part element="tns:username" name="username" />
+	</wsdl:message>
+	<wsdl:message name="deleteResponse"/>
+
+	<wsdl:message name="list"/>
+	<wsdl:message name="listResponse">
+		<wsdl:part element="tns:userList" name="userList" />
+	</wsdl:message>
+
+	<wsdl:message name="login">
+		<wsdl:part element="tns:login" name="login" />
+	</wsdl:message>
+	<wsdl:message name="loginResponse">
+		<wsdl:part element="tns:loginUser" name="loginUser" />
+	</wsdl:message>
+
+	<wsdl:portType name="userService">
+		<wsdl:operation name="add">
+			<wsdl:input message="tns:add" />
+			<wsdl:output message="tns:addResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="delete">
+			<wsdl:input message="tns:delete" />
+			<wsdl:output message="tns:deleteResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="list">
+			<wsdl:input message="tns:list" />
+			<wsdl:output message="tns:listResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="login">
+			<wsdl:input message="tns:login" />
+			<wsdl:output message="tns:loginResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="userServiceSoap" type="tns:userService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="add">
+			<soap:operation soapAction="http://service.project.my.com/user/add" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="delete">
+			<soap:operation soapAction="http://service.project.my.com/user/delete" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="list">
+			<soap:operation soapAction="http://service.project.my.com/user/list" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="login">
+			<soap:operation soapAction="http://service.project.my.com/user/login" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="userService">
+		<wsdl:port binding="tns:userServiceSoap" name="userServicePort">
+			<soap:address location="http://localhost:9000/userService" />
+		</wsdl:port>
+	</wsdl:service>
+
+	<!--
+	WSDL文件编写好后, 使用如下命令生成服务接口代码
+	wsimport -d . -p com.my.project.service.bare -keep -verbose -Xnocompile META-INF/wsdl/user-bare.wsdl
+	Server启动后生成客户端代码
+	wsimport -d . -p com.my.project.service.bare.client -keep -verbose -Xnocompile http://localhost:9000/userService?wsdl
+	-->
+
+</wsdl:definitions>
