@@ -9,5 +9,24 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-	
+
+	<!-- 添加服务WebService Listener -->
+	<listener>
+		<listener-class>
+			com.sun.xml.ws.transport.http.servlet.WSServletContextListener
+		</listener-class>
+	</listener>
+	<!-- 添加服务WebService Servlet -->
+	<servlet>
+		<!-- 必须与sun-jaxws.xml中endpoint的name属性相同 -->
+		<servlet-name>userService</servlet-name>
+		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>userService</servlet-name>
+		<!-- 必须与sun-jaxws.xml中endpoint的url-pattern属性相同 -->
+		<url-pattern>/userService</url-pattern>
+	</servlet-mapping>
+
 </web-app> 

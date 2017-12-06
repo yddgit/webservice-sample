@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+	<!-- name: 对应web.xml中servlet名称 -->
+	<!-- implementation: 服务实现全类名 -->
+	<!-- url-pattern: 访问路径 -->
+	<endpoint
+		name="userService"
+		implementation="com.my.project.service.container.UserServiceImpl"
+		url-pattern="/userService"/>
+</endpoints>
