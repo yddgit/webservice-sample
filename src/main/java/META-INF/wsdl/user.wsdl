@@ -46,10 +46,16 @@
 		<wsdl:part element="tns:loginResponse" name="parameters" />
 	</wsdl:message>
 
+	<!-- 添加异常消息 -->
+	<wsdl:message name="userException">
+		<wsdl:part name="UserException" element="tns:UserException"/>
+	</wsdl:message>
+
 	<wsdl:portType name="userService">
 		<wsdl:operation name="add">
 			<wsdl:input message="tns:add" />
 			<wsdl:output message="tns:addResponse" />
+			<wsdl:fault name="userException" message="tns:userException"/>
 		</wsdl:operation>
 		<wsdl:operation name="delete">
 			<wsdl:input message="tns:delete" />
@@ -62,6 +68,7 @@
 		<wsdl:operation name="login">
 			<wsdl:input message="tns:login" />
 			<wsdl:output message="tns:loginResponse" />
+			<wsdl:fault name="userException" message="tns:userException"/>
 		</wsdl:operation>
 	</wsdl:portType>
 
@@ -75,6 +82,9 @@
 			<wsdl:output>
 				<soap:body use="literal" />
 			</wsdl:output>
+			<wsdl:fault name="userException">
+				<soap:fault name="userException" use="literal"/>
+			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="delete">
 			<soap:operation soapAction="http://service.project.my.com/user/delete" />
@@ -102,6 +112,9 @@
 			<wsdl:output>
 				<soap:body use="literal" />
 			</wsdl:output>
+			<wsdl:fault name="userException">
+				<soap:fault name="userException" use="literal"/>
+			</wsdl:fault>
 		</wsdl:operation>
 	</wsdl:binding>
 
@@ -113,7 +126,9 @@
 
 	<!--
 	WSDL文件编写好后, 使用如下命令生成服务接口代码
-	wsimport -d . -p com.my.project.service -keep -verbose -Xnocompile META-INF/wsdl/user.wsdl
+	wsimport -d . -p com.my.project.service.normal -keep -verbose -Xnocompile META-INF/wsdl/user.wsdl
+	Server启动后生成客户端代码
+	wsimport -d . -p com.my.project.service.normal.client -keep -verbose -Xnocompile http://localhost:9000/userService?wsdl 
 	-->
 
 </wsdl:definitions>

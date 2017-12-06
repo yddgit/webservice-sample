@@ -36,6 +36,15 @@ public class UserRepository {
 	}
 
 	/**
+	 * 根据用户名获取用户
+	 * @param username 用户名
+	 * @return 如果对应的用户存在则返回用户对象, 否则返回null
+	 */
+	public User get(String username) {
+		return users.get(username);
+	}
+
+	/**
 	 * 添加用户
 	 * @param user 用户
 	 */
@@ -60,7 +69,8 @@ public class UserRepository {
 	 * @return 用户列表
 	 */
 	public List<User> list() {
-		return Arrays.asList(users.values().toArray(new User[]{}));
+		User[] arr = users.values().toArray(new User[]{});
+		return Arrays.asList(arr);
 	}
 
 	/**

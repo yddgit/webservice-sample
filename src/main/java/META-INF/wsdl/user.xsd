@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://service.project.my.com/user"
-	xmlns:tns="http://service.project.my.com/user"
-	elementFormDefault="qualified">
+	xmlns:tns="http://service.project.my.com/user">
 
 	<!-- 方法请求和返回消息定义 -->
 	<xs:element name="add" type="tns:add"/>
@@ -13,34 +12,16 @@
 	<xs:element name="listResponse" type="tns:listResponse"/>
 	<xs:element name="login" type="tns:login"/>
 	<xs:element name="loginResponse" type="tns:loginResponse"/>
+	<xs:element name="UserException" type="tns:UserException"/>
 
 	<!-- user实体定义 -->
 	<xs:complexType name="user">
 		<xs:sequence>
-			<xs:element name="username" type="tns:username"/>
-			<xs:element name="password" type="tns:password"/>
-			<xs:element name="nickname" type="tns:nickname"/>
+			<xs:element name="username" type="xs:string"/>
+			<xs:element name="password" type="xs:string"/>
+			<xs:element name="nickname" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
-	<!-- user实体属性值限定 -->
-	<xs:simpleType name="username">
-		<xs:restriction base="xs:string">
-			<xs:minLength value="1"/>
-			<xs:maxLength value="64"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="password">
-		<xs:restriction base="xs:string">
-			<xs:minLength value="1"/>
-			<xs:maxLength value="32"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="nickname">
-		<xs:restriction base="xs:string">
-			<xs:minLength value="1"/>
-			<xs:maxLength value="128"/>
-		</xs:restriction>
-	</xs:simpleType>
 
 	<!-- 消息类型定义 -->
 	<xs:complexType name="add">
@@ -76,6 +57,13 @@
 	<xs:complexType name="loginResponse">
 		<xs:sequence>
 			<xs:element name="user" type="tns:user"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- 异常类型定义 -->
+	<xs:complexType name="UserException">
+		<xs:sequence>
+			<xs:element name="message" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
 
