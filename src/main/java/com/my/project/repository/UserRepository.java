@@ -36,6 +36,15 @@ public class UserRepository {
 	}
 
 	/**
+	 * 检查用户是否存在
+	 * @param username 用户名
+	 * @return 用户存在时返回true, 否则返回false
+	 */
+	public boolean exist(String username) {
+		return users.containsKey(username);
+	}
+
+	/**
 	 * 根据用户名获取用户
 	 * @param username 用户名
 	 * @return 如果对应的用户存在则返回用户对象, 否则返回null

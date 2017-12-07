@@ -27,6 +27,7 @@ public class ObjectFactory {
     private final static QName _LoginResponse_QNAME = new QName("http://service.project.my.com/user", "loginResponse");
     private final static QName _UserException_QNAME = new QName("http://service.project.my.com/user", "UserException");
     private final static QName _DeleteResponse_QNAME = new QName("http://service.project.my.com/user", "deleteResponse");
+    private final static QName _Authorize_QNAME = new QName("http://service.project.my.com/user", "authorize");
     private final static QName _AddResponse_QNAME = new QName("http://service.project.my.com/user", "addResponse");
     private final static QName _Add_QNAME = new QName("http://service.project.my.com/user", "add");
     private final static QName _ListResponse_QNAME = new QName("http://service.project.my.com/user", "listResponse");
@@ -39,6 +40,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link Authorize }
+     * 
+     */
+    public Authorize createAuthorize() {
+        return new Authorize();
     }
 
     /**
@@ -146,6 +155,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "deleteResponse")
     public JAXBElement<DeleteResponse> createDeleteResponse(DeleteResponse value) {
         return new JAXBElement<DeleteResponse>(_DeleteResponse_QNAME, DeleteResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Authorize }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "authorize")
+    public JAXBElement<Authorize> createAuthorize(Authorize value) {
+        return new JAXBElement<Authorize>(_Authorize_QNAME, Authorize.class, null, value);
     }
 
     /**

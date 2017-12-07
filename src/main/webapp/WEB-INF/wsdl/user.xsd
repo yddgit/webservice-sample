@@ -13,6 +13,7 @@
 	<xs:element name="login" type="tns:login"/>
 	<xs:element name="loginResponse" type="tns:loginResponse"/>
 	<xs:element name="UserException" type="tns:UserException"/>
+	<xs:element name="authorize" type="tns:authorize"/>
 
 	<!-- user实体定义 -->
 	<xs:complexType name="user">
@@ -64,6 +65,13 @@
 	<xs:complexType name="UserException">
 		<xs:sequence>
 			<xs:element name="message" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- 授权用户信息(通过Header来传输) -->
+	<xs:complexType name="authorize">
+		<xs:sequence>
+			<xs:element name="authorizedUser" type="tns:user"/>
 		</xs:sequence>
 	</xs:complexType>
 

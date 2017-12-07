@@ -41,13 +41,16 @@ public interface UserService {
     /**
      * 
      * @param username
+     * @throws UserException_Exception
      */
     @WebMethod(action = "http://service.project.my.com/user/delete")
     @RequestWrapper(localName = "delete", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.client.Delete")
     @ResponseWrapper(localName = "deleteResponse", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.client.DeleteResponse")
     public void delete(
         @WebParam(name = "username", targetNamespace = "")
-        String username);
+        String username)
+        throws UserException_Exception
+    ;
 
     /**
      * 
