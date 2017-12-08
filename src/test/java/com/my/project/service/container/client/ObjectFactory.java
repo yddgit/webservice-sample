@@ -24,17 +24,21 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Authorize_QNAME = new QName("http://service.project.my.com/user", "authorize");
+    private final static QName _DownloadMimeResponse_QNAME = new QName("http://service.project.my.com/user", "downloadMimeResponse");
     private final static QName _DeleteResponse_QNAME = new QName("http://service.project.my.com/user", "deleteResponse");
+    private final static QName _Authorize_QNAME = new QName("http://service.project.my.com/user", "authorize");
     private final static QName _ListResponse_QNAME = new QName("http://service.project.my.com/user", "listResponse");
     private final static QName _Delete_QNAME = new QName("http://service.project.my.com/user", "delete");
     private final static QName _UploadResponse_QNAME = new QName("http://service.project.my.com/user", "uploadResponse");
     private final static QName _Login_QNAME = new QName("http://service.project.my.com/user", "login");
+    private final static QName _UploadMimeResponse_QNAME = new QName("http://service.project.my.com/user", "uploadMimeResponse");
     private final static QName _LoginResponse_QNAME = new QName("http://service.project.my.com/user", "loginResponse");
     private final static QName _UserException_QNAME = new QName("http://service.project.my.com/user", "UserException");
+    private final static QName _UploadMime_QNAME = new QName("http://service.project.my.com/user", "uploadMime");
     private final static QName _AddResponse_QNAME = new QName("http://service.project.my.com/user", "addResponse");
     private final static QName _Add_QNAME = new QName("http://service.project.my.com/user", "add");
     private final static QName _Upload_QNAME = new QName("http://service.project.my.com/user", "upload");
+    private final static QName _DownloadMime_QNAME = new QName("http://service.project.my.com/user", "downloadMime");
     private final static QName _DownloadResponse_QNAME = new QName("http://service.project.my.com/user", "downloadResponse");
     private final static QName _List_QNAME = new QName("http://service.project.my.com/user", "list");
     private final static QName _Download_QNAME = new QName("http://service.project.my.com/user", "download");
@@ -47,11 +51,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UploadMime }
+     * 
+     */
+    public UploadMime createUploadMime() {
+        return new UploadMime();
+    }
+
+    /**
      * Create an instance of {@link AddResponse }
      * 
      */
     public AddResponse createAddResponse() {
         return new AddResponse();
+    }
+
+    /**
+     * Create an instance of {@link UploadMimeResponse }
+     * 
+     */
+    public UploadMimeResponse createUploadMimeResponse() {
+        return new UploadMimeResponse();
     }
 
     /**
@@ -84,6 +104,14 @@ public class ObjectFactory {
      */
     public Download createDownload() {
         return new Download();
+    }
+
+    /**
+     * Create an instance of {@link DownloadMime }
+     * 
+     */
+    public DownloadMime createDownloadMime() {
+        return new DownloadMime();
     }
 
     /**
@@ -127,6 +155,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DownloadMimeResponse }
+     * 
+     */
+    public DownloadMimeResponse createDownloadMimeResponse() {
+        return new DownloadMimeResponse();
+    }
+
+    /**
      * Create an instance of {@link Delete }
      * 
      */
@@ -167,12 +203,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Authorize }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link DownloadMimeResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "authorize")
-    public JAXBElement<Authorize> createAuthorize(Authorize value) {
-        return new JAXBElement<Authorize>(_Authorize_QNAME, Authorize.class, null, value);
+    @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "downloadMimeResponse")
+    public JAXBElement<DownloadMimeResponse> createDownloadMimeResponse(DownloadMimeResponse value) {
+        return new JAXBElement<DownloadMimeResponse>(_DownloadMimeResponse_QNAME, DownloadMimeResponse.class, null, value);
     }
 
     /**
@@ -182,6 +218,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "deleteResponse")
     public JAXBElement<DeleteResponse> createDeleteResponse(DeleteResponse value) {
         return new JAXBElement<DeleteResponse>(_DeleteResponse_QNAME, DeleteResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Authorize }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "authorize")
+    public JAXBElement<Authorize> createAuthorize(Authorize value) {
+        return new JAXBElement<Authorize>(_Authorize_QNAME, Authorize.class, null, value);
     }
 
     /**
@@ -221,6 +266,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UploadMimeResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "uploadMimeResponse")
+    public JAXBElement<UploadMimeResponse> createUploadMimeResponse(UploadMimeResponse value) {
+        return new JAXBElement<UploadMimeResponse>(_UploadMimeResponse_QNAME, UploadMimeResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponse }{@code >}}
      * 
      */
@@ -236,6 +290,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "UserException")
     public JAXBElement<UserException> createUserException(UserException value) {
         return new JAXBElement<UserException>(_UserException_QNAME, UserException.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UploadMime }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "uploadMime")
+    public JAXBElement<UploadMime> createUploadMime(UploadMime value) {
+        return new JAXBElement<UploadMime>(_UploadMime_QNAME, UploadMime.class, null, value);
     }
 
     /**
@@ -263,6 +326,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "upload")
     public JAXBElement<Upload> createUpload(Upload value) {
         return new JAXBElement<Upload>(_Upload_QNAME, Upload.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DownloadMime }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.project.my.com/user", name = "downloadMime")
+    public JAXBElement<DownloadMime> createDownloadMime(DownloadMime value) {
+        return new JAXBElement<DownloadMime>(_DownloadMime_QNAME, DownloadMime.class, null, value);
     }
 
     /**

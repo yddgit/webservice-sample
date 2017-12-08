@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://service.project.my.com/user"
-	xmlns:tns="http://service.project.my.com/user">
+	xmlns:tns="http://service.project.my.com/user"
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
 
 	<!-- 方法请求和返回消息定义 -->
 	<xs:element name="add" type="tns:add"/>
@@ -16,6 +17,10 @@
 	<xs:element name="uploadResponse" type="tns:uploadResponse"/>
 	<xs:element name="download" type="tns:download"/>
 	<xs:element name="downloadResponse" type="tns:downloadResponse"/>
+	<xs:element name="uploadMime" type="tns:uploadMime"/>
+	<xs:element name="uploadMimeResponse" type="tns:uploadMimeResponse"/>
+	<xs:element name="downloadMime" type="tns:downloadMime"/>
+	<xs:element name="downloadMimeResponse" type="tns:downloadMimeResponse"/>
 	<xs:element name="UserException" type="tns:UserException"/>
 	<xs:element name="authorize" type="tns:authorize"/>
 
@@ -80,6 +85,24 @@
 	<xs:complexType name="downloadResponse">
 		<xs:sequence>
 			<xs:element name="file" type="xs:base64Binary"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- 上传文件示例(使用DataHandler) -->
+	<xs:complexType name="uploadMime">
+		<xs:sequence>
+			<xs:element name="file" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="uploadMimeResponse">
+		<xs:sequence/>
+	</xs:complexType>
+	<!-- 下载文件示例(使用DataHandler) -->
+	<xs:complexType name="downloadMime">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="downloadMimeResponse">
+		<xs:sequence>
+			<xs:element name="file" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
 		</xs:sequence>
 	</xs:complexType>
 

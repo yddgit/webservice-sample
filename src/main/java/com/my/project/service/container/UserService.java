@@ -2,6 +2,7 @@
 package com.my.project.service.container;
 
 import java.util.List;
+import javax.activation.DataHandler;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -103,5 +104,27 @@ public interface UserService {
     @RequestWrapper(localName = "download", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.Download")
     @ResponseWrapper(localName = "downloadResponse", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.DownloadResponse")
     public byte[] download();
+
+    /**
+     * 
+     * @param file
+     */
+    @WebMethod(action = "http://service.project.my.com/user/uploadMime")
+    @RequestWrapper(localName = "uploadMime", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.UploadMime")
+    @ResponseWrapper(localName = "uploadMimeResponse", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.UploadMimeResponse")
+    public void uploadMime(
+        @WebParam(name = "file", targetNamespace = "")
+        DataHandler file);
+
+    /**
+     * 
+     * @return
+     *     returns javax.activation.DataHandler
+     */
+    @WebMethod(action = "http://service.project.my.com/user/downloadMime")
+    @WebResult(name = "file", targetNamespace = "")
+    @RequestWrapper(localName = "downloadMime", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.DownloadMime")
+    @ResponseWrapper(localName = "downloadMimeResponse", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.DownloadMimeResponse")
+    public DataHandler downloadMime();
 
 }
