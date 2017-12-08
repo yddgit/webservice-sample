@@ -46,6 +46,22 @@
 		<wsdl:part element="tns:loginResponse" name="parameters" />
 	</wsdl:message>
 
+	<!-- 上传文件示例 -->
+	<wsdl:message name="upload">
+		<wsdl:part element="tns:upload" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="uploadResponse">
+		<wsdl:part element="tns:uploadResponse" name="parameters" />
+	</wsdl:message>
+
+	<!-- 下载文件示例 -->
+	<wsdl:message name="download">
+		<wsdl:part element="tns:download" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="downloadResponse">
+		<wsdl:part element="tns:downloadResponse" name="parameters" />
+	</wsdl:message>
+
 	<!-- 添加异常消息 -->
 	<wsdl:message name="userException">
 		<wsdl:part name="UserException" element="tns:UserException"/>
@@ -75,6 +91,14 @@
 			<wsdl:input message="tns:login" />
 			<wsdl:output message="tns:loginResponse" />
 			<wsdl:fault name="userException" message="tns:userException"/>
+		</wsdl:operation>
+		<wsdl:operation name="upload">
+			<wsdl:input message="tns:upload" />
+			<wsdl:output message="tns:uploadResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="download">
+			<wsdl:input message="tns:download" />
+			<wsdl:output message="tns:downloadResponse" />
 		</wsdl:operation>
 	</wsdl:portType>
 
@@ -126,6 +150,24 @@
 			<wsdl:fault name="userException">
 				<soap:fault name="userException" use="literal"/>
 			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="upload">
+			<soap:operation soapAction="http://service.project.my.com/user/upload" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="download">
+			<soap:operation soapAction="http://service.project.my.com/user/download" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
 		</wsdl:operation>
 	</wsdl:binding>
 

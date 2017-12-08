@@ -82,4 +82,26 @@ public interface UserService {
         throws UserException
     ;
 
+    /**
+     * 
+     * @param file
+     */
+    @WebMethod(action = "http://service.project.my.com/user/upload")
+    @RequestWrapper(localName = "upload", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.Upload")
+    @ResponseWrapper(localName = "uploadResponse", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.UploadResponse")
+    public void upload(
+        @WebParam(name = "file", targetNamespace = "")
+        byte[] file);
+
+    /**
+     * 
+     * @return
+     *     returns byte[]
+     */
+    @WebMethod(action = "http://service.project.my.com/user/download")
+    @WebResult(name = "file", targetNamespace = "")
+    @RequestWrapper(localName = "download", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.Download")
+    @ResponseWrapper(localName = "downloadResponse", targetNamespace = "http://service.project.my.com/user", className = "com.my.project.service.container.DownloadResponse")
+    public byte[] download();
+
 }

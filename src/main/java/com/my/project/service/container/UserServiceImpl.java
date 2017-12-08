@@ -1,5 +1,11 @@
 package com.my.project.service.container;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,6 +15,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 import javax.xml.ws.WebServiceContext;
+import javax.xml.ws.soap.MTOM;
 
 import com.my.project.exception.UserException;
 import com.my.project.model.User;
@@ -27,6 +34,7 @@ import com.sun.xml.ws.developer.JAXWSProperties;
 	wsdlLocation = "WEB-INF/wsdl/user.wsdl",
 	serviceName = "userService",
 	portName = "userServicePort")
+@MTOM
 public class UserServiceImpl implements UserService {
 
 	private UserRepository repository = UserRepository.getInstance();
@@ -129,6 +137,64 @@ public class UserServiceImpl implements UserService {
 			throw new UserException("input wrong password!");
 		}
 		return user;
+	}
+
+	@Override
+	public void upload(byte[] file) {
+		String userHome = System.getProperty("user.home") + File.separator;
+		String fileName = userHome + "upload-server.jpg";
+		FileOutputStream outputStream = null;
+		try {
+			outputStream = new FileOutputStream(fileName);
+			outputStream.write(file);
+			outputStream.flush();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(outputStream != null) {
+				try {
+					outputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public byte[] download() {
+		InputStream inputStream = null;
+		ByteArrayOutputStream outputStream = null;
+		byte[] downloadFile = new byte[0];
+		try {
+			outputStream = new ByteArrayOutputStream();
+			inputStream = UserServiceImpl.class.getClassLoader().getResourceAsStream("download-server.jpg");
+			byte[] buffer = new byte[1024];
+			int length;
+			while((length = inputStream.read(buffer)) != -1) {
+				outputStream.write(buffer, 0, length);
+			}
+			outputStream.flush();
+			downloadFile = outputStream.toByteArray();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(inputStream != null) {
+					inputStream.close();
+				}
+				if(outputStream != null) {
+					outputStream.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return downloadFile;
 	}
 
 }
